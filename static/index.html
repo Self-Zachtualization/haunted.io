@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Haunted.io</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <h1>HAUNTED</h1>
+    <div class="bigmode">
+      <button class="users">These are the users</button>
+      <div class="userbox"></div>
+      <button class="ghosts">These are the currently active ghosts</button>
+      <div class="ghostbox"></div>
+    </div>
+    <div class="reporter">
+      Do you have a ghost to report? Fill out the form below. If you aren't a registered hunter already, you
+      will be. <br />
+      <form id="new-ghost">
+        <input type="text" name="name" placeholder="Ghost's name" id="name" required /><br />
+        <input type="text" name="ghost_type" placeholder="Ghost's type" id="ghost_type" required /><br />
+        <input type="radio" name="is_violent" value="true" id="violent" required />
+        <label for="violent">This ghost is violent</label><br />
+        <input type="radio" name="is_violent" value="false" id="non-violent" required />
+        <label for="non-violent">This ghost is NOT violent</label><br />
+        <input type="text" name="address" placeholder="Ghost's location" id="address" required /><br />
+        <input type="text" name="username" placeholder="Your username" id="username" required /><br />
+        <button type="submit" id="ghost-report">Submit Ghost Report</button>
+      </form>
+    </div>
+  </body>
+</html>
