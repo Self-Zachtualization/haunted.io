@@ -26,6 +26,7 @@ $(`.ghosts`).click(() => {
 
 $("form").submit((event) => {
   event.preventDefault();
+
   const ghostInfo = {};
   $(".reporter")
     .find("input")
@@ -33,15 +34,7 @@ $("form").submit((event) => {
       ghostInfo[e.name] = e.value;
     });
   ghostInfo.is_violent = $("input[type=radio][name=is_violent]:checked").val();
-  console.log(ghostInfo);
-
-  const json = [];
-  json.push(ghostInfo);
-  console.log(json);
-
-  // $.post("/api/ghosts", JSON.stringify(ghostInfo), (data, status) => {
-  //   alert(`Data: ${JSON.stringify(data)} \nStatus: ${status}`);
-  // });
+  // console.log(ghostInfo);
   $.ajax({
     url: "/api/ghosts",
     type: "POST",

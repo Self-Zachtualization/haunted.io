@@ -9,6 +9,10 @@ const PORT = process.env.PORT || 3000;
 
 const pool = new pg.Pool({
   // database: "haunted",
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 app.use(express.static("static"));
