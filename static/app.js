@@ -1,10 +1,25 @@
 $(`.users`).click(() => {
-  $(".userbox").empty();
+  $(".bigmode")
+    .find(".card")
+    .each(() => {
+      $(this).empty();
+    });
   $.get("/api/users/active", (result) => {
     for (i = 0; i < result.length; i++) {
-      let { username, name } = result[i];
-      $(`<h2>Hunter: ${username}</h2>`).appendTo(".userbox");
-      $(`<h3>Encountered ghost: ${name}</h3>`).appendTo(".userbox");
+      let { username, name, ghost_type, is_violent, address } = result[i];
+      const $ghostCard = $(`<div class=ghost-card card`);
+      $ghostCard.appendTo(".spread");
+      $(`<h2 class='card-header'>Hunter: ${username}</h2>`).appendTo($ghostCard);
+      $(`<h2 class='card-header'>Reported: ${name}</h3>`).appendTo($ghostCard);
+      is_violent
+        ? $ghostCard
+            .addClass("bg-danger")
+            .append($(`<p class='card-content'>Has been known to be violent towards the living.</p>`))
+        : $ghostCard
+            .addClass("bg-warning")
+            .append(`<p class='card-content'>Hasn't proven itself to be dangerous yet.</p>`);
+      $(`<p class='card-content'>`);
+      $(`<p class='card-content'>Reported at ${address}.`).appendTo($ghostCard);
     }
   });
 });
