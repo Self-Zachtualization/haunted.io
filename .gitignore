@@ -3,7 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# ignore .env file
+# ignore .dev files
+scratch.js
 .env
 
 # User-specific files

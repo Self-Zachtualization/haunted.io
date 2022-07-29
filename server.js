@@ -8,7 +8,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const pool = new pg.Pool({
-  // database: "haunted",
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
@@ -32,14 +31,15 @@ app.post("/api/ghosts", (req, res, next) => {
       res.send(info.rows);
     })
     .catch(next);
-
-  // `INSERT INTO ghosts (name, ghost_type, is_violent, address) VALUES ($1, $2, $3, $4);`,
-  // [name, ghost_type, is_violent, address]
 });
 
 app.get("/api/users/active", (req, res, next) => {
   pool
-    .query("SELECT * FROM users")
+    .query(
+      `SELECT username, name FROM users 
+        INNER JOIN users_ghosts ug ON ug.user_id = users.id 
+          INNER JOIN ghosts ON ug.ghost_id = ghosts.id;`
+    )
     .then((info) => {
       res.send(info.rows);
     })

@@ -2,9 +2,9 @@ $(`.users`).click(() => {
   $(".userbox").empty();
   $.get("/api/users/active", (result) => {
     for (i = 0; i < result.length; i++) {
-      let { username, num_ghosts } = result[i];
+      let { username, name } = result[i];
       $(`<h2>Hunter: ${username}</h2>`).appendTo(".userbox");
-      $(`<h3>Ghosts hunted: ${num_ghosts}</h3>`).appendTo(".userbox");
+      $(`<h3>Encountered ghost: ${name}</h3>`).appendTo(".userbox");
     }
   });
 });
