@@ -10,24 +10,74 @@
     <script defer src="app.js"></script>
   </head>
   <body>
-    <h1>HAUNTED</h1>
-    <div class="bigmode">
-      <button class="users">These are the users</button>
-      <div class="spread card-deck"></div>
+    <h1 class="jumbotron text-center">HAUNTED</h1>
+    <div class="d-flex justify-content-center pt-3">
+      <button class="users">Click here to see active hunters and their findings</button>
     </div>
-    <div class="reporter">
-      Do you have a ghost to report? Fill out the form below. If you aren't a registered hunter already, you
-      will be. <br />
-      <form id="new-ghost">
-        <input type="text" name="name" placeholder="Ghost's name" id="name" required /><br />
-        <input type="text" name="ghost_type" placeholder="Ghost's type" id="ghost_type" required /><br />
-        <input type="radio" name="is_violent" value="true" id="violent" required />
-        <label for="violent">This ghost is violent</label><br />
-        <input type="radio" name="is_violent" value="false" id="non-violent" required />
-        <label for="non-violent">This ghost is NOT violent</label><br />
-        <input type="text" name="address" placeholder="Ghost's location" id="address" required /><br />
-        <input type="text" name="username" placeholder="Your username" id="username" required /><br />
-        <button type="submit" id="ghost-report">Submit Ghost Report</button>
+    <div class="bigmode container p-3">
+      <div id="spread" class="card-deck"></div>
+    </div>
+    <div id="reporter" class="container p-3">
+      <h2>Become A Hunter</h2>
+      <p>
+        Do you have a ghost to report? Fill out the form below. If you aren't a registered hunter already, you
+        will be.
+      </p>
+      <form id="new-ghost" class="needs-validation" novalidate>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" name="name" placeholder="Ghost's name" id="name" required />
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+          <label for="ghost_type">Ghost type:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ghost_type"
+            placeholder="Ghost's type"
+            id="ghost_type"
+            required
+          />
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+          <label for="violent">This ghost is violent</label>
+          <input type="radio" name="is_violent" value="true" id="violent" required />
+        </div>
+        <div class="form-group">
+          <label for="non-violent">This ghost is NOT violent</label>
+          <input type="radio" name="is_violent" value="false" id="non-violent" required />
+        </div>
+        <div class="form-group">
+          <label for="address">Where did you encounter the entity?</label>
+          <input
+            type="text"
+            class="form-control"
+            name="address"
+            placeholder="Ghost's location"
+            id="address"
+            required
+          />
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <div class="form-group">
+          <label for="username">What's your username?</label>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            placeholder="Your username"
+            id="username"
+            required
+          />
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+        <button type="submit" id="ghost-report" class="btn btn-primary">Submit Ghost Report</button>
       </form>
     </div>
   </body>

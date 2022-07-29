@@ -34,7 +34,7 @@ app.post("/api/ghosts", (req, res, next) => {
 app.get("/api/users/active", (req, res, next) => {
   pool
     .query(
-      `SELECT username, name FROM users 
+      `SELECT username, name, ghost_type, is_violent, address FROM users 
         INNER JOIN users_ghosts ug ON ug.user_id = users.id 
           INNER JOIN ghosts ON ug.ghost_id = ghosts.id;`
     )

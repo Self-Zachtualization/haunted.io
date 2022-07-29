@@ -1,25 +1,22 @@
 $(`.users`).click(() => {
-  $(".bigmode")
-    .find(".card")
-    .each(() => {
-      $(this).empty();
-    });
+  $("#spread").empty();
   $.get("/api/users/active", (result) => {
     for (i = 0; i < result.length; i++) {
       let { username, name, ghost_type, is_violent, address } = result[i];
-      const $ghostCard = $(`<div class=ghost-card card`);
-      $ghostCard.appendTo(".spread");
-      $(`<h2 class='card-header'>Hunter: ${username}</h2>`).appendTo($ghostCard);
-      $(`<h2 class='card-header'>Reported: ${name}</h3>`).appendTo($ghostCard);
-      is_violent
-        ? $ghostCard
-            .addClass("bg-danger")
-            .append($(`<p class='card-content'>Has been known to be violent towards the living.</p>`))
-        : $ghostCard
-            .addClass("bg-warning")
-            .append(`<p class='card-content'>Hasn't proven itself to be dangerous yet.</p>`);
-      $(`<p class='card-content'>`);
-      $(`<p class='card-content'>Reported at ${address}.`).appendTo($ghostCard);
+      const $ghostCard = $(`<div id='ghost-card' class='card text-center'>`);
+      $(`<h2 class='card-title'>Hunter: ${username}</h2>`).appendTo($ghostCard);
+      $(`<h2 class='card-header'>Reported: ${name}, a ${ghost_type}.</h3>`).appendTo($ghostCard);
+      const $cardBody = $(`<div class='card-body'></div>`);
+      $(`<h3 class='card-text'>Reported at ${address}.</h3>`).appendTo($cardBody);
+      if (is_violent === true) {
+        $ghostCard.addClass("bg-danger");
+        $(`<h3 class='card-text'>Has been known to be violent towards the living.</h3>`).appendTo($cardBody);
+      } else {
+        $ghostCard.addClass("bg-warning");
+        $(`<h3 class='card-text'>Hasn't proven itself to be dangerous yet.</h3>`).appendTo($cardBody);
+      }
+      $cardBody.appendTo($ghostCard);
+      $ghostCard.appendTo("#spread");
     }
   });
 });
