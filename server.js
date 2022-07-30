@@ -15,18 +15,21 @@ const pool = new pg.Pool({
 app.use(express.static("static"));
 app.use(express.json());
 
-app.post("/api/ghosts", (req, res, next) => {
+app.post("/api/ghosts", async (req, res, next) => {
   console.log(req.body);
   const { name, ghost_type, is_violent, address, username } = req.body;
-  pool
+  let uid = await pool.query(`INSERT INTO users (username) VALUES ($1) RETURNING id;`, [username]);
+  uid = JSON.stringify(uid.rows[0].id);
+  console.log(uid ? `await success: ${uid}` : `you can't do async await idiot`);
+  await pool
     .query(
       `INSERT INTO ghosts 
-              (name, ghost_type, is_violent, address) 
-            VALUES ($1, $2, $3, $4);`,
-      [name, ghost_type, is_violent, address, username]
+      (name, ghost_type, is_violent, address, user_id) 
+    VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+      [name, ghost_type, is_violent, address, uid]
     )
     .then((info) => {
-      res.send(info.rows);
+      res.send(info.rows[0]);
     })
     .catch(next);
 });
@@ -35,8 +38,7 @@ app.get("/api/users/active", (req, res, next) => {
   pool
     .query(
       `SELECT username, name, ghost_type, is_violent, address FROM users 
-        INNER JOIN users_ghosts ug ON ug.user_id = users.id 
-          INNER JOIN ghosts ON ug.ghost_id = ghosts.id;`
+        INNER JOIN ghosts g ON g.user_id = users.id;`
     )
     .then((info) => {
       res.send(info.rows);
