@@ -31,3 +31,10 @@ const pool = new pg.Pool({connectionString: process.env.DATABASE_URL,
   ...(process.env.NODE_ENV === "production" ? { ssl: { rejectUnauthorized: false } } : {}),
 });
 ```
+
+## Data Relationships
+
+There are two active tables in the database, and three commented-out placeholder tables which represent future planning for me personally. Feel free to remove them entirely from your migration/seed files if you wish. The active tables are `users` and `ghosts`, with a one user to many ghosts relationship.
+
+![ERD DIAGRAM](img/haunted.io.jpg)
+![Client-Server-Database Diagram](img/haunted.io-CSB.jpg)
