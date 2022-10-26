@@ -37,7 +37,6 @@ $("form").submit((event) => {
       ghostInfo[e.name] = e.value;
     });
   ghostInfo.is_violent = $("input[type=radio][name=is_violent]:checked").val();
-  console.log(ghostInfo);
   $.ajax({
     url: "/api/ghosts",
     type: "POST",
